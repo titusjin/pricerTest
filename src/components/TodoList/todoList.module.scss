@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  height: auto;
+  margin: 20px 0px;
+  padding: 20px;
+  border-radius: 20px;
+  
+  color: #1664C0;
+  font-family: "Roboto", sans-serif;
+  background-color: #A0A0A0;
+}
+
+.btnArea {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.editBtns {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  vertical-align: baseline;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

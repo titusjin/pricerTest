@@ -1,0 +1,42 @@
+.container {
+  width: 60%;
+  color: #1664C0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.title--section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1.5rem;
+  
+  .addIcon{
+    cursor: pointer;
+  }
+}
+
+.editContainer {
+  margin: 20px 0px;
+  padding: 20px;
+  width: 100%;
+  background-color: #BEBEBE;
+  border-radius: 20px;
+  
+  .titleArea {
+    margin: 10px;
+    width: 100%;
+  }
+
+  .btnArea {
+    margin: 20px 0px;
+    
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+}
+
+.blockClick {
+  cursor: not-allowed;
+}
