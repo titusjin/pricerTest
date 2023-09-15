@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addData, setSendSuccess } from '../../reducers/todoReducer';
 
-import { nanoid } from 'nanoid';
+import * as actions  from '../../actions/todoActions';
+
+// import { nanoid } from 'nanoid'; //for pure FE wihtout API use.
 import { TextField, Button } from '@mui/material';
 
 import TodoList from '../TodoList';
 
 import styles from  './mainContent.module.scss';
 import commonStyles from '../common/common.module.scss';
+import { nanoid } from 'nanoid';
 
 const MainContent = () =>  {
   const dispatch = useDispatch();
@@ -22,22 +25,38 @@ const MainContent = () =>  {
   const [todoTitle, setTodoTitle] = useState('');
   const [processing, setProcessing] = useState(false);
 
+  /** the effection for making the success message disapear and reset 
+   * the application state 
+   */
   useEffect(() => {
     if(sendSuccess){
       setTimeout(() => {
         dispatch(setSendSuccess(false));
+        //TODO: Reset the component state combined into one function later
+        setTodoTitle('');
+        setTodoContent('');
         setShowEdit(false);
       }, 1500);
     }
   }, [dispatch, sendSuccess]);
 
-  function addTodoEditArea(e) {
+  const addTodoEditArea = e => {
     setShowEdit(true);
   }
 
   const handleAddTodo = e => {
     /** only check if the content is not empty/ title is additional */
     if(todoContent){
+      /** For calling API  */
+      // actions.createTodoAction(dispatch, {
+      //   id: nanoid(), 
+      //   title: todoTitle, 
+      //   content: todoContent
+      // });
+      /** 
+       * for pure FE test without API support can directly 
+       * use the dispatch to update the store.
+       */
       const sendData = {
         id: nanoid(),
         title: todoTitle,
@@ -49,6 +68,7 @@ const MainContent = () =>  {
     }
   }
   const handleCancel = e => {
+    //TODO: RESet the component state combined into one function later
     setTodoContent('');
     setTodoTitle('');
     setShowEdit(false);

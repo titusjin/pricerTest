@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import * as actions  from '../../actions/todoActions';
 import { editData, setEditSuccess, deleteItem } from '../../reducers/todoReducer';
 
 import {
@@ -44,13 +46,16 @@ const TodoList = () =>  {
   }
   useEffect(() =>{
     setProcessing(false);
-    sendEditSuccess 
+    sendEditSuccess
       ? handleEditSuccess()
       : handleEditError()
   }, [dispatch, sendEditSuccess]);
 
   const triggerEdit = () => {
     setProcessing(true);
+    /** For using API */
+    // actions.updateTodoAction(currentItem);
+    /** For pure FE without API testing */
     dispatch(editData(currentItem));
   }
   const handleClose = () => {
@@ -147,6 +152,9 @@ const TodoList = () =>  {
     setOpenModal(true);
   }
   const handleDelete = item => {
+    /** For callling API */
+    // actions.deleteTodoAction(dispatch,item.id);
+    /** onlye for local pure FE without API testing */
     dispatch(deleteItem(item));
   }
   const renderListitems = () => {

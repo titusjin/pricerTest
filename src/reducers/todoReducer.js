@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 /** 
- * Todo data structure liie: 
+ * NOTE: For intital local testing for pure frontend 
+ *       No need to wait API ready.
+ * Todo data structure like: 
  * {
  *   contnet: {string},
  *   title: {string},
  *   id: {string: UUID},
  * }
- * 
  */
 const initialState = {
   currentData: [],
@@ -18,19 +19,12 @@ export const toDoDataSlice = createSlice({
   name: 'toDoDataSlice',
   initialState,
   reducers: {
-    /** payload should conatins the id for the record */
-    // reduceData: (state, action) => {
-    //   state.currentData = state.currentData.filter(d =>d.id !== action.payload);
-    // },
     addData: (state, action) => {
       state.currentData.push( action.payload);
       state.sendSuccess = true;
     },
     editData: (state, action) => {
       const editItem = action.payload;
-
-      console.info('in editData: ', editItem);
-      
       state.currentData.forEach(item => {
         if(item.id === editItem.id){
           item.title = editItem.title;
@@ -38,6 +32,9 @@ export const toDoDataSlice = createSlice({
         };
         state.sendEditSuccess = true;
       });
+    },
+    fetchAllTodos: (state, action) => {
+      state.currentData = action.payload;
     },
     deleteItem: (state, action) => {
       const checkIditem = item => item.id === action.payload.id;
@@ -53,10 +50,10 @@ export const toDoDataSlice = createSlice({
   },
 });
 
-export const { 
-  // reduceData,
+export const {
   addData,
   editData,
+  fetchAllTodos,
   deleteItem,
   setSendSuccess,
   setEditSuccess,
